@@ -1,6 +1,5 @@
-import Telegraf from "telegraf";
-import dotenv from "dotenv";
-
+const Telegraf = require("telegraf");
+const dotenv = require("dotenv");
 dotenv.config();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
@@ -9,3 +8,5 @@ bot.help(ctx => ctx.reply("Send me a sticker"));
 bot.on("sticker", ctx => ctx.reply("👍"));
 bot.hears("hi", ctx => ctx.reply("Hey there"));
 bot.launch();
+
+console.log("AlignakBot is ready!!");
