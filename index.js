@@ -18,6 +18,17 @@ function getMoonInfo(callback) {
   });
 }
 
+function formatHour(dateHour) {
+  const [h, minutes] = dateHour.split(":");
+  const hours = parseInt(h);
+  if (hours > 23) {
+    const newHours = hours - 24;
+    return `${newHours < 10 ? "0" + newHours : newHours}h${minutes}`;
+  }
+
+  return `${hours}h${minutes}`;
+}
+
 dotenv.config();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
@@ -31,7 +42,11 @@ bot.hears(/pleine lune/, ctx => {
     } else {
       const { moonIllumination, moonRise } = moonData;
       ctx.reply(
-        `La lune sera visible à partir de ${moonRise} aujourd'hui. L'illumination sera de ${Math.floor(
+        `La lune se présente dès ${formatHour(
+          moonRise
+        )} aujourd'hui, la période culminante sera de ${formatHour(
+          major2Start
+        )} à ${formatHour(major2Stop)} Sa luminosité sera de ${Math.floor(
           moonIllumination * 100
         )}%`
       );
