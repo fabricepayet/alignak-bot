@@ -13,7 +13,7 @@ bot.on("sticker", ctx => ctx.reply("👍"));
 bot.hears("hi", ctx => ctx.reply("Hey there"));
 bot.launch();
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
 app.get("/", function(req, res) {
   return res.json({
