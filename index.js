@@ -9,7 +9,7 @@ const SOLUNAR_API_URL = "https://api.solunar.org/solunar/-21.13,55.24";
 var request = require("request");
 
 function getMoonInfo(callback) {
-  request(SOLUNAR_API_URL + "," + moment().format(YYYYMMDD) + ",4", function(
+  request(SOLUNAR_API_URL + "," + moment().format("YYYYMMDD") + ",4", function(
     error,
     response,
     body
@@ -27,7 +27,7 @@ const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 bot.start(ctx => ctx.reply("Salut !"));
 bot.help(ctx => ctx.reply("Envoi moi un sticker"));
 bot.on("sticker", ctx => ctx.reply("👍"));
-bot.hears(/pleine une/, ctx => {
+bot.hears(/pleine lune/, ctx => {
   getMoonInfo((err, moonData) => {
     if (err) {
       ctx.reply("Je ne peux pas recupérer l'information");
