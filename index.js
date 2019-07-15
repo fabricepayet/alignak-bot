@@ -40,7 +40,7 @@ bot.hears(/pleine lune/, ctx => {
     if (err) {
       ctx.reply("Je ne peux pas recupérer l'information");
     } else {
-      const { moonIllumination, moonRise } = moonData;
+      const { moonIllumination, moonRise, major2Stop, major2Start } = moonData;
       ctx.reply(
         `La lune se présente dès ${formatHour(
           moonRise
