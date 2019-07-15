@@ -14,10 +14,7 @@ function getMoonInfo(callback) {
     response,
     body
   ) {
-    console.log("error:", error); // Print the error if one occurred
-    console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
-    console.log("body:", body); // Print the HTML for the Google homepage.
-    callback(null, body);
+    callback(null, JSON.parse(body));
   });
 }
 
@@ -32,8 +29,12 @@ bot.hears(/pleine lune/, ctx => {
     if (err) {
       ctx.reply("Je ne peux pas recupérer l'information");
     } else {
-      const { moonIllumination } = moonData;
-      ctx.reply(`L'illumination sera de ${moonIllumination} aujourd'hui`);
+      const { moonIllumination, moonRise } = moonData;
+      ctx.reply(
+        `La lune sera visible à partir de ${moonRise} aujourd'hui. L'illumination sera de ${Math.floor(
+          moonIllumination * 100
+        )}%`
+      );
     }
   });
 });
