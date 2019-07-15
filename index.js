@@ -32,9 +32,7 @@ function formatHour(dateHour) {
 dotenv.config();
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
-bot.start(ctx => ctx.reply("Salut !"));
-bot.help(ctx => ctx.reply("Envoi moi un sticker"));
-bot.on("sticker", ctx => ctx.reply("👍"));
+bot.start(ctx => ctx.reply("Bonjour, je suis Séléné"));
 bot.hears(/pleine lune/, ctx => {
   getMoonInfo((err, moonData) => {
     if (err) {
@@ -42,11 +40,11 @@ bot.hears(/pleine lune/, ctx => {
     } else {
       const { moonIllumination, moonRise, major2Stop, major2Start } = moonData;
       ctx.reply(
-        `La lune se présente dès ${formatHour(
+        `Aujourd'hui la lune sera présente dès ${formatHour(
           moonRise
-        )} aujourd'hui, la période culminante sera de ${formatHour(
+        )}. Sa période culminante sera de ${formatHour(
           major2Start
-        )} à ${formatHour(major2Stop)} Sa luminosité sera de ${Math.floor(
+        )} à ${formatHour(major2Stop)} et sa luminosité sera de ${Math.floor(
           moonIllumination * 100
         )}%`
       );
